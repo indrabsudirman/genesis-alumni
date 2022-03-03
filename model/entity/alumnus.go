@@ -17,3 +17,11 @@ type AlumnusName struct {
 	UpdatedAt time.Time      `json:"updated_at"`
 	DeletedAt gorm.DeletedAt `json:"-" gorm:"index, column: deleted_at"`
 }
+
+type Tabler interface {
+	TableName() string
+}
+
+func (AlumnusName) TableName() string {
+	return "genesis_names"
+}
