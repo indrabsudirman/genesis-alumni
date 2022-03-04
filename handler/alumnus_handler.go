@@ -1,8 +1,11 @@
 package handler
 
 import (
+	"genesis-alumni/database"
 	"genesis-alumni/model/entity"
 	"genesis-alumni/model/request"
+	"genesis-alumni/utils"
+	"log"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
@@ -30,4 +33,27 @@ func AlumnusHandlerCreate(ctx *fiber.Ctx) error {
 		Address: alumnus.Address,
 		Phone:   alumnus.Phone,
 	}
+
+	hashedPass, err := utils.HashingPassword(alumnus.Password)
+	if err != nil {
+		log.Println("error while hash password", err)
+		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "internal server error",
+		})
+	}
+
+	newAlumnus.Password = (hashedPass)
+
+	//Save data alumnus to database
+	errCreateAlumnus := database.DB.Create(&newAlumnus).Error
+	if errCreateAlumnus != nil {
+		return ctx.Status(500).JSON(fiber.Map{
+			"message": "failed to store data",
+		})
+	}
+
+	return ctx.JSON(fiber.Map{
+		"message": "success",
+		"data":    newAlumnus,
+	})
 }
