@@ -1,6 +1,10 @@
 package route
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"genesis-alumni/handler"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 func RouteInit(route *fiber.App) {
 
@@ -9,4 +13,6 @@ func RouteInit(route *fiber.App) {
 			"كَيْفَ حَالُكُمْ": "Genesis",
 		})
 	})
+
+	route.Post("/login", handler.LoginHandler)
 }
