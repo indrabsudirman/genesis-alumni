@@ -1,0 +1,19 @@
+{
+  "name": "genesis-alumni",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.go",
+  "scripts": {
+    "serve": "nodemon --exec go run main.go"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/indrabsudirman/genesis-alumni.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/indrabsudirman/genesis-alumni/issues"
+  },
+  "homepage": "https://github.com/indrabsudirman/genesis-alumni#readme"
+}
