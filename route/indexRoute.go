@@ -15,4 +15,5 @@ func RouteInit(route *fiber.App) {
 	})
 
 	route.Post("/login", handler.LoginHandler)
+	route.Post("/alumnus", handler.AlumnusHandlerCreate)
 }
