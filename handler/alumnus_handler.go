@@ -57,3 +57,17 @@ func AlumnusHandlerCreate(ctx *fiber.Ctx) error {
 		"data":    newAlumnus,
 	})
 }
+
+func AlumnusHandlerGetAll(ctx *fiber.Ctx) error {
+
+	userInfo := ctx.Locals("userInfo")
+	log.Println("user info :", userInfo)
+
+	var alumnusNames []entity.AlumnusName
+	result := database.DB.Debug().Find(&alumnusNames)
+	if result.Error != nil {
+		log.Println(result.Error)
+	}
+
+	return ctx.JSON(alumnusNames)
+}
